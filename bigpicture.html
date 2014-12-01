@@ -1,0 +1,70 @@
+<!-- 
+ *
+ * bigpicture.js
+ *
+ * bigpicture.js is a framework that allows infinite panning and infinite zooming. 
+ *                    See it in action on http://www.bigpicture.bi/demo !
+ *
+ * ------------------------------------------------
+ *  author:  Joseph Ernest (twitter: @JosephErnestB)
+ *  version: 1.0.0
+ *  license: GPL v2.0
+ *  url:     http://github.com/josephernest/bigpicture.js
+ *  website: http://www.bigpicture.bi/demo 
+ *   
+ * -->
+
+<!DOCTYPE html> 
+<html lang="en"> 
+
+<head> 
+  <meta charset="utf-8"> 
+  <title>bigpicture.js</title> 
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="bigpicture.css" rel="stylesheet">
+</head> 
+
+<body>  
+  <div id="bigpicture-container"><div id="bigpicture" data-zoom="1" data-x="721" data-y="480">
+    <div contenteditable="true" class="text" data-size="57" data-x="941" data-y="735">What is BigPicture ?</div>
+      <div contenteditable="true" class="text" data-size="11.7647" data-x="977.918" data-y="812.327">BigPicture is like an infinite notepad, in which you can pan (north/south/east/west),<br />but also in which you can ZOOM ! (Nearly) infinitely many times.<br /></div>
+      <div contenteditable="true" class="text" data-size="20" data-x="1589.92" data-y="593.974">USAGE<br />######<br /><br /><span class="fa fa-search"></span>   Search : F3 or CTRL+F<br /><br /><span class="fa fa-arrows"></span>   Pan : click and drag<br /><br /><span class="fa fa-fw"> </span>  Move text : CTRL+click and drag<br /><br /><span class="fa fa-search-plus"></span>   Zoom In : PageDown  or CTRL+ or<br />                       mousewheel  or double-click<br /><span class="fa fa-search-minus"></span>   Zoom Out : PageUp  or CTRL- or<br />                         mousewheel  or CTRL+double-click<br /><br /><span class="fa fa-cloud"></span>   Biggest picture : F2  (try it twice!)<br /></div>
+      <div contenteditable="true" class="text" data-size="20" data-x="853.918" data-y="946.974">Easy write in one click : click anywhere and write!</div>
+      <div contenteditable="true" class="text" data-size="6.92042" data-x="921.984" data-y="979.527">No need to go into a Toolbox and choose to create a new Textbox... Just click anywhere and write !</div>
+      <div contenteditable="true" class="text" data-size="20" data-x="1569.31" data-y="1022.37">More features to come soon...</div>
+      <div contenteditable="true" class="text" data-size="20" data-x="1200.31" data-y="558.372">Don't forget to zoom out...<br />... to see the BigPicture<br /></div>
+      <div contenteditable="true" class="text" data-size="34" data-x="2178.21" data-y="686.772">TODO</div>
+      <div contenteditable="true" class="text" data-size="11.7647" data-x="2171.79" data-y="731.566">eat more vegetables!</div>
+      <div contenteditable="true" class="text" data-size="2.39461" data-x="2184.11" data-y="745.768"><br /></div>
+      <div contenteditable="true" class="text" data-size="11.7647" data-x="2307.46" data-y="682.461">buy some chocolate</div>
+      <div contenteditable="true" class="text" data-size="20" data-x="3769.67" data-y="1106.18"></div>
+      <div contenteditable="true" class="text" data-size="20" data-x="3769.67" data-y="1106.18"></div>
+      <div contenteditable="true" class="text" data-size="11.7647" data-x="2217.45" data-y="650.697">Gaelle's website</div>
+      <div contenteditable="true" class="text" data-size="6.92042" data-x="2301.16" data-y="716.672">playlist for next party</div>
+      <div contenteditable="true" class="text" data-size="1.40859" data-x="2309.22" data-y="725.513">Tove Lo - Stay High<br />Ariana Grande - Love Me Harder ft. The Weeknd (Official Audio)<br />Cut Copy - Lights Shine On<br />Porter Robinson - Sea of Voices<br /><br /></div>
+      <div contenteditable="true" class="text" data-size="98.26" data-x="-2070.87" data-y="1698.75">This is not the biggest text yet... <br /></div>
+      <div contenteditable="true" class="text" data-size="482.751" data-x="3394.25" data-y="3171.58">Think outside the box.</div>
+      <div contenteditable="true" class="text" data-size="20" data-x="1576.49" data-y="774.86"><br /></div>
+      <div contenteditable="true" class="text" data-size="20" data-x="867.486" data-y="699.86">mind mapping tool</div>
+      <div contenteditable="true" class="text" data-size="4.07083" data-x="2185.72" data-y="745.497">carrots<br />salad<br />artichokes<br />tomatoes<br />spinach<br /></div>
+      <div contenteditable="true" class="text" data-size="11.7647" data-x="1593.01" data-y="1051.39">(follow me on twitter @JosephErnestB)</div>
+    </div></div>
+  
+  <script>
+    // serialize the document to localStorage when the user closes the page, so that we can recover it at the next load
+    window.onbeforeunload = function() {  
+      var bpClone = $("#bigpicture-container").clone(true);
+      $("#bigpicture", bpClone).attr('data-x', current.x); $("#bigpicture", bpClone).attr('data-y', current.y); $("#bigpicture", bpClone).attr('data-zoom', current.zoom); $("#bigpicture", bpClone).removeAttr("style");
+      $(".text", bpClone).each(function() { $(this).attr('data-x', $(this).data('x')); $(this).attr('data-y', $(this).data('y')); $(this).attr('data-size', $(this).data('size')); this.removeAttribute('style'); });
+      localStorage.setItem("BigPicture", bpClone.html()); 
+    };
+	
+	// comment the next line if you don't want to save/load from localStorage
+    var ls = localStorage.getItem("BigPicture"); if (ls) document.getElementById('bigpicture-container').innerHTML = ls;  
+  </script>
+  
+  <script type="text/javascript" src="bigpicture.js"></script>
+  
+</body>
+</html>
