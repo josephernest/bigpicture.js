@@ -5,9 +5,7 @@
  *                    See it in action on http://www.bigpicture.bi/demo !
  *
  * ------------------------------------------------
- *  author:  Joseph Ernest (twitter: @JosephErnestB)
- *  version: 1.0.0
- *  license: GPL v2.0
+ *  author:  Joseph Ernest (twitter: @JosephErnest)
  *  url:     http://github.com/josephernest/bigpicture.js
  *  website: http://www.bigpicture.bi/demo 
  *   
