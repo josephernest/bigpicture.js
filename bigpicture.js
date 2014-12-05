@@ -57,8 +57,8 @@
    * PAN AND MOVE  
    */
   
-  movingtext = null;
-  dragging = false;
+  var movingtext = null;
+  var dragging = false;
   
   bpContainer.onmousedown = function(e) {
     if ($(e.target).hasClass('text') && e.ctrlKey) {
