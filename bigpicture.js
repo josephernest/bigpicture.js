@@ -11,17 +11,23 @@
  *   
  */
 
-(function() {
+(function (window, $) {
+  "use strict";
   /*
    * INITIALIZATION  
-   */            
+   */
+
+  var document = window.document,
+    bpContainer = document.getElementById('bigpicture-container'),
+    bp = document.getElementById('bigpicture'),
+    previous_mouse,
+    previous;
 
   document.body.setAttribute('spellcheck', false);
-  bpContainer = document.getElementById('bigpicture-container');  
-  bp = document.getElementById('bigpicture');  
+
   if (!bp) return;
 
-  current = {x: $(bp).data('x'), y: $(bp).data('y'), zoom: $(bp).data('zoom')};
+  var current = {x: $(bp).data('x'), y: $(bp).data('y'), zoom: $(bp).data('zoom')};
 
   bp.x = 0; bp.y = 0;
   bp.updateposition = function() { bp.style.left = bp.x + 'px'; bp.style.top = bp.y + 'px'; };
@@ -250,13 +256,13 @@
     }
     if ((e.ctrlKey || e.metaKey) && e.keyCode == 70) {         // CTRL+F
       e.preventDefault();
-      query = window.prompt("What are you looking for?", "");
+      var query = window.prompt("What are you looking for?", "");
       findnext(query);
       return;
     } 
     if (e.keyCode == 114) {                 // F3
       e.preventDefault();
-      if (results.index == -1) query = window.prompt("What are you looking for?", "");
+      if (results.index == -1) var query = window.prompt("What are you looking for?", "");
       findnext(query);
       return;
     }
@@ -266,4 +272,4 @@
       return;
     }
   } 
-})();
+}(window, jQuery));
