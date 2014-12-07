@@ -61,7 +61,7 @@
   var dragging = false;
   
   bpContainer.onmousedown = function(e) {
-    if ($(e.target).hasClass('text') && e.ctrlKey) {
+    if ($(e.target).hasClass('text') && (e.ctrlKey || e.metaKey)) {
       movingtext = e.target;
       movingtext.className = "text noselect notransition";
     }
@@ -70,7 +70,7 @@
       dragging = true;
     }
     biggestpictureseen = false;
-	previous_mouse = {x: e.pageX, y: e.pageY};
+	previousMouse = {x: e.pageX, y: e.pageY};
   }
   
   window.onmouseup = function() {
@@ -86,18 +86,18 @@
   bpContainer.onmousemove = function(e) {
     if (dragging) {
       bp.style.transitionDuration = "0s";
-      bp.x += e.pageX - previous_mouse.x;
-      bp.y += e.pageY - previous_mouse.y;
+      bp.x += e.pageX - previousMouse.x;
+      bp.y += e.pageY - previousMouse.y;
       bp.updateposition();
-      current.x -= (e.pageX - previous_mouse.x) * current.zoom;
-      current.y -= (e.pageY - previous_mouse.y) * current.zoom;
-      previous_mouse = {x: e.pageX, y: e.pageY};
+      current.x -= (e.pageX - previousMouse.x) * current.zoom;
+      current.y -= (e.pageY - previousMouse.y) * current.zoom;
+      previousMouse = {x: e.pageX, y: e.pageY};
     }
     if (movingtext) {
-      $(movingtext).data("x", $(movingtext).data("x") + (e.pageX - previous_mouse.x) * current.zoom);
-      $(movingtext).data("y", $(movingtext).data("y") + (e.pageY - previous_mouse.y) * current.zoom);
+      $(movingtext).data("x", $(movingtext).data("x") + (e.pageX - previousMouse.x) * current.zoom);
+      $(movingtext).data("y", $(movingtext).data("y") + (e.pageY - previousMouse.y) * current.zoom);
 	  updateposition(movingtext);
-      previous_mouse = {x: e.pageX, y: e.pageY};
+      previousMouse = {x: e.pageX, y: e.pageY};
     }
   }
   
