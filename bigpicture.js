@@ -11,17 +11,22 @@
  *   
  */
 
-(function() {
+(function () {
+  "use strict";
+
   /*
    * INITIALIZATION  
-   */            
+   */
+
+  var bpContainer = document.getElementById('bigpicture-container'),
+    bp = document.getElementById('bigpicture'),
+    previous;
 
   document.body.setAttribute('spellcheck', false);
-  bpContainer = document.getElementById('bigpicture-container');  
-  bp = document.getElementById('bigpicture');  
+
   if (!bp) return;
 
-  current = {x: $(bp).data('x'), y: $(bp).data('y'), zoom: $(bp).data('zoom')};
+  var current = {x: $(bp).data('x'), y: $(bp).data('y'), zoom: $(bp).data('zoom')};
 
   bp.x = 0; bp.y = 0;
   bp.updateposition = function() { bp.style.left = bp.x + 'px'; bp.style.top = bp.y + 'px'; };
@@ -57,8 +62,9 @@
    * PAN AND MOVE  
    */
   
-  var movingtext = null;
-  var dragging = false;
+  var movingtext = null,
+    dragging = false,
+    previousmouse;	
   
   bpContainer.onmousedown = function(e) {
     if ($(e.target).hasClass('text') && (e.ctrlKey || e.metaKey)) {
@@ -70,7 +76,7 @@
       dragging = true;
     }
     biggestpictureseen = false;
-	previousMouse = {x: e.pageX, y: e.pageY};
+	previousmouse = {x: e.pageX, y: e.pageY};
   }
   
   window.onmouseup = function() {
@@ -86,18 +92,18 @@
   bpContainer.onmousemove = function(e) {
     if (dragging) {
       bp.style.transitionDuration = "0s";
-      bp.x += e.pageX - previousMouse.x;
-      bp.y += e.pageY - previousMouse.y;
+      bp.x += e.pageX - previousmouse.x;
+      bp.y += e.pageY - previousmouse.y;
       bp.updateposition();
-      current.x -= (e.pageX - previousMouse.x) * current.zoom;
-      current.y -= (e.pageY - previousMouse.y) * current.zoom;
-      previousMouse = {x: e.pageX, y: e.pageY};
+      current.x -= (e.pageX - previousmouse.x) * current.zoom;
+      current.y -= (e.pageY - previousmouse.y) * current.zoom;
+      previousmouse = {x: e.pageX, y: e.pageY};
     }
     if (movingtext) {
-      $(movingtext).data("x", $(movingtext).data("x") + (e.pageX - previousMouse.x) * current.zoom);
-      $(movingtext).data("y", $(movingtext).data("y") + (e.pageY - previousMouse.y) * current.zoom);
+      $(movingtext).data("x", $(movingtext).data("x") + (e.pageX - previousmouse.x) * current.zoom);
+      $(movingtext).data("y", $(movingtext).data("y") + (e.pageY - previousmouse.y) * current.zoom);
 	  updateposition(movingtext);
-      previousMouse = {x: e.pageX, y: e.pageY};
+      previousmouse = {x: e.pageX, y: e.pageY};
     }
   }
   
@@ -174,8 +180,9 @@
    * SEARCH
    */
    
-  var results = {index: -1, elements: [], text: ""};
-  var redosearch = true;      
+  var results = {index: -1, elements: [], text: ""},
+    redosearch = true,
+	query;
   
   function find(txt) {
     results = {index: -1, elements: [], text: txt};
@@ -250,13 +257,13 @@
     }
     if ((e.ctrlKey || e.metaKey) && e.keyCode == 70) {         // CTRL+F
       e.preventDefault();
-      query = window.prompt("What are you looking for?", "");
+      var query = window.prompt("What are you looking for?", "");
       findnext(query);
       return;
     } 
     if (e.keyCode == 114) {                 // F3
       e.preventDefault();
-      if (results.index == -1) query = window.prompt("What are you looking for?", "");
+      if (results.index == -1) var query = window.prompt("What are you looking for?", "");
       findnext(query);
       return;
     }
