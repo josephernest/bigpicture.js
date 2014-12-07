@@ -257,13 +257,13 @@
     }
     if ((e.ctrlKey || e.metaKey) && e.keyCode == 70) {         // CTRL+F
       e.preventDefault();
-      var query = window.prompt("What are you looking for?", "");
+      query = window.prompt("What are you looking for?", "");
       findnext(query);
       return;
     } 
     if (e.keyCode == 114) {                 // F3
       e.preventDefault();
-      if (results.index == -1) var query = window.prompt("What are you looking for?", "");
+      if (results.index == -1) query = window.prompt("What are you looking for?", "");
       findnext(query);
       return;
     }
