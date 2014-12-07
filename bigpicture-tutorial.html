@@ -1,0 +1,68 @@
+<!-- 
+ *
+ * bigpicture.js
+ *
+ * bigpicture.js is a framework that allows infinite panning and infinite zooming. 
+ *                    See it in action on http://www.bigpicture.bi/demo !
+ *
+ * ------------------------------------------------
+ *  author:  Joseph Ernest (twitter: @JosephErnest)
+ *  url:     http://github.com/josephernest/bigpicture.js
+ *  website: http://www.bigpicture.bi/demo 
+ *   
+ * -->
+
+<!DOCTYPE html> 
+<html lang="en"> 
+
+<head> 
+  <meta charset="utf-8"> 
+  <title>bigpicture.js</title> 
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="bigpicture.css" rel="stylesheet">
+</head> 
+
+<body>  
+
+  <div id="bigpicture-container">
+    <div id="bigpicture" data-zoom="1" data-x="721" data-y="480">
+
+      <!-- start -->
+      <div contenteditable="true" class="text" data-size="60" data-x="800" data-y="600">Welcome to <b>bigpicture.js</b><br>Click and drag to pan <span class="fa fa-arrows"></span> left</div>
+      <div contenteditable="true" class="text" data-size="60" data-x="1800" data-y="650">...almost there...</div>
+      <div contenteditable="true" class="text" data-size="60" data-x="2800" data-y="600">Congratulations! You've learned<br>how to pan <span class="fa fa-arrows"></span> the infinite plane.<br>Double-click here <span class="fa fa-arrow-down"></span> to zoom <span class="fa fa-search-plus"></span> in!</div>
+
+      <!-- zoomed in -->
+      <div contenteditable="true" class="text" data-size="4" data-x="3300" data-y="800">keep zooming!</div>
+      <div contenteditable="true" class="text" data-size="0.5" data-x="3303" data-y="810">You've mastered zooming in! Ctrl-double-click will zoom <span class="fa fa-search-minus"></span> out, but for now, press F2</div>
+
+      <!-- zoomed out -->
+      <div contenteditable="true" class="text" data-size="700" data-x="400" data-y="2000">The Big Picture!</div>
+      <div contenteditable="true" class="text" data-size="200" data-x="100" data-y="4000">F2 will bring you to the max <span class="fa fa-cloud"></span> zoom level. <br>Press F2 to return to the zoom level you were at previously.</div>
+
+      <div contenteditable="true" class="text" data-size="150" data-x="5000" data-y="3900">Read more here <span class="fa fa-arrow-right"></span></div>
+
+      <!-- more instructions -->
+      <div contenteditable="true" class="text" data-size="20" data-x="6400" data-y="3800">USAGE<br>######<br><br><span class="fa fa-search"></span>   Search : F3 or CTRL+F<br><br><span class="fa fa-arrows"></span>   Pan : click and drag<br><br><span class="fa fa-fw"> </span>  Add text : Single-click<br>       Move text : CTRL+click and drag<br><br><span class="fa fa-search-plus"></span>   Zoom In : PageDown  or CTRL+ or<br>                       mousewheel  or double-click<br><span class="fa fa-search-minus"></span>   Zoom Out : PageUp  or CTRL- or<br>                         mousewheel  or CTRL+double-click<br><br><span class="fa fa-cloud"></span>   Biggest picture : F2</div>
+
+      <div class="text" data-size="20" data-x="6400" data-y="4200">
+        more features to come soon.... <br><br>   (follow me on twitter <a target="_blank" href="https://twitter.com/JosephErnest">@JosephErnest</a>)
+      </div>
+
+      <!-- example uses -->
+      <div contenteditable="true" class="text" data-size="34" data-x="2178.21" data-y="1686.772">TODO</div>
+      <div contenteditable="true" class="text" data-size="11.7647" data-x="2307.46" data-y="1682.461">buy some chocolate</div>
+      <div contenteditable="true" class="text" data-size="11.7647" data-x="2217.45" data-y="1650.697">Gaelle's website</div>
+      <div contenteditable="true" class="text" data-size="11.7647" data-x="2171.79" data-y="1731.566">eat more vegetables!</div>
+      <div contenteditable="true" class="text" data-size="4.07083" data-x="2185.72" data-y="1745.497">carrots<br>salad<br>artichokes<br>tomatoes<br>spinach<br></div>
+      <div contenteditable="true" class="text" data-size="6.92042" data-x="2301.16" data-y="1716.672">playlist for next party</div>
+      <div class="text" data-size="1.40859" data-x="2309.22" data-y="1725.513"><a target="_blank" href="https://www.youtube.com/watch?v=oh2LWWORoiM">Tove Lo - Stay High</a><br><a target="_blank" href="https://www.youtube.com/watch?v=hyqBUdFCI0M">Ariana Grande - Love Me Harder ft. The Weeknd (Official Audio)</a><br><a target="_blank" href="https://www.youtube.com/watch?v=3t8wCGdCntw">Cut Copy - Lights Shine On</a><br><a target="_blank" href="https://www.youtube.com/watch?v=lSooYPG-5Rg">Porter Robinson - Sea of Voices</a><br><br></div>
+
+    </div>  
+  </div>
+ 
+  <script type="text/javascript" src="bigpicture.js"></script>
+  
+</body>
+</html>
