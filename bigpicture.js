@@ -43,8 +43,10 @@
    * NEW TEXT  
    */            
    
+  function isContainedByClass(e, cls) { while (e && e.tagName) { if (e.classList.contains(cls)) return true; e = e.parentNode; } return false; }
+   
   bpContainer.onclick = function(e) {
-    if (e.target.className == 'text') return;
+    if (isContainedByClass(e.target, 'text')) return;
     var tb = document.createElement('div');
     tb.className = "text";
     tb.contentEditable = true;
