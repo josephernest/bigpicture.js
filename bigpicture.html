@@ -49,19 +49,6 @@
       <div contenteditable="true" class="text" data-size="11.7647" data-x="1593.01" data-y="1051.39">(follow me on twitter @JosephErnest)</div>
     </div></div>
   
-  <script>
-    // serialize the document to localStorage when the user closes the page, so that we can recover it at the next load
-    window.onbeforeunload = function() {  
-      var bpClone = $("#bigpicture-container").clone(true);
-      $("#bigpicture", bpClone).attr('data-x', current.x); $("#bigpicture", bpClone).attr('data-y', current.y); $("#bigpicture", bpClone).attr('data-zoom', current.zoom); $("#bigpicture", bpClone).removeAttr("style");
-      $(".text", bpClone).each(function() { $(this).attr('data-x', $(this).data('x')); $(this).attr('data-y', $(this).data('y')); $(this).attr('data-size', $(this).data('size')); this.removeAttribute('style'); });
-      localStorage.setItem("BigPicture", bpClone.html()); 
-    };
-	
-	// comment the next line if you don't want to save/load from localStorage
-    var ls = localStorage.getItem("BigPicture"); if (ls) document.getElementById('bigpicture-container').innerHTML = ls;  
-  </script>
-  
   <script type="text/javascript" src="bigpicture.js"></script>
   
 </body>
