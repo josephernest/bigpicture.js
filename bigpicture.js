@@ -11,7 +11,7 @@
  *   
  */
 
-(function () {
+(function() {
   "use strict";
 
   /*
@@ -51,7 +51,7 @@
     $(tb).data("size", 20 * current.zoom);
     $(tb).data("x", current.x + (e.clientX) * current.zoom);
     $(tb).data("y", current.y + (e.clientY) * current.zoom);
-	updateposition(tb);
+    updateposition(tb);
     $(tb).on('input', function(){ redosearch = true; });
     $(tb).blur(function() { if ($(this).text().replace(/^\s+|\s+$/g, '') == '') { $(this).remove(); }; }); // remove text if empty
     bp.appendChild(tb);
@@ -64,7 +64,7 @@
   
   var movingtext = null,
     dragging = false,
-    previousmouse;	
+    previousmouse;
   
   bpContainer.onmousedown = function(e) {
     if ($(e.target).hasClass('text') && (e.ctrlKey || e.metaKey)) {
@@ -76,7 +76,7 @@
       dragging = true;
     }
     biggestpictureseen = false;
-	previousmouse = {x: e.pageX, y: e.pageY};
+    previousmouse = {x: e.pageX, y: e.pageY};
   }
   
   window.onmouseup = function() {
@@ -102,7 +102,7 @@
     if (movingtext) {
       $(movingtext).data("x", $(movingtext).data("x") + (e.pageX - previousmouse.x) * current.zoom);
       $(movingtext).data("y", $(movingtext).data("y") + (e.pageY - previousmouse.y) * current.zoom);
-	  updateposition(movingtext);
+      updateposition(movingtext);
       previousmouse = {x: e.pageX, y: e.pageY};
     }
   }
@@ -123,13 +123,13 @@
     sy = (typeof sy === "undefined") ? window.innerHeight / 2 : sy;  
   
     bp.style.transitionDuration = "0.2s";      
-	
-    bp.x = 0, bp.y = 0; bp.updateposition();
-    current = {x: wx - sx * zoom, y: wy - sy * zoom, zoom: zoom};	
 
-	$(".text").each(function() { updateposition(this); });
+    bp.x = 0, bp.y = 0; bp.updateposition();
+    current = {x: wx - sx * zoom, y: wy - sy * zoom, zoom: zoom};
+
+    $(".text").each(function() { updateposition(this); });
     
-    biggestpictureseen = false;	
+    biggestpictureseen = false;
   }
   
   function zoomontext(res) {
@@ -147,9 +147,9 @@
       [].forEach.call(texteelements, function(elt) {
         var rect2 = elt.getBoundingClientRect();
         var rect = {left: $(elt).data("x"), 
-		            top: $(elt).data("y"), 
-				    right: (rect2.width > 2 && rect2.width < 10000) ? current.x + rect2.right * current.zoom : $(elt).data("x") + 300 * $(elt).data("size") / 20, 
-				    bottom: (rect2.height > 2 && rect2.height < 10000) ? current.y + rect2.bottom * current.zoom : $(elt).data("y") + 100 * $(elt).data("size") / 20 };
+                    top: $(elt).data("y"), 
+                    right: (rect2.width > 2 && rect2.width < 10000) ? current.x + rect2.right * current.zoom : $(elt).data("x") + 300 * $(elt).data("size") / 20, 
+                    bottom: (rect2.height > 2 && rect2.height < 10000) ? current.y + rect2.bottom * current.zoom : $(elt).data("y") + 100 * $(elt).data("size") / 20 };
         if (rect.left < minX)  minX = rect.left; 
         if (rect.right > maxX) maxX = rect.right; 
         if (rect.top < minY)  minY = rect.top; 
@@ -165,7 +165,6 @@
     if (!biggestpictureseen) {
       previous = {x: current.x, y: current.y, zoom: current.zoom};
       var rect = universeboundingrect();
-	  console.log(rect);
       var zoom = Math.max((rect.maxX - rect.minX) / window.innerWidth, (rect.maxY - rect.minY) / window.innerHeight) * 1.1;
       onzoom(zoom, (rect.minX + rect.maxX) / 2, (rect.minY + rect.maxY) / 2);
       biggestpictureseen = true; 
@@ -182,7 +181,7 @@
    
   var results = {index: -1, elements: [], text: ""},
     redosearch = true,
-	query;
+    query;
   
   function find(txt) {
     results = {index: -1, elements: [], text: txt};
