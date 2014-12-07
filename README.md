@@ -5,6 +5,8 @@ bigpicture.js is a framework that allows infinite panning and infinite zooming.
  
 [Live demo here](http://josephernest.github.io/bigpicture.js/bigpicture.html)
 
+[Tutorial](http://josephernest.github.io/bigpicture.js/bigpicture-tutorial.html)
+
 Or, here the bigger project : www.bigpicture.bi/demo !
 
 Screenshot
