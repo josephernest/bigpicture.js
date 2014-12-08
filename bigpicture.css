@@ -13,7 +13,7 @@ html, body {
 }
 
 #bigpicture-container {
-  position: absolute;
+  position: fixed;
   min-height: 100%;   
   min-width: 100%;    
 }
