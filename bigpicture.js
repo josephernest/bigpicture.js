@@ -1,8 +1,8 @@
 /*
  * bigpicture.js
  *
- * bigpicture.js is a framework that allows infinite panning and infinite zooming. 
- *                    See it in action on http://www.bigpicture.bi/demo !
+ * bigpicture.js is a library that allows infinite panning and infinite zooming in HTML pages. 
+ *               See it in action on http://www.bigpicture.bi/demo !
  *
  * ------------------------------------------------
  *  author:  Joseph Ernest (twitter: @JosephErnest)
@@ -17,12 +17,11 @@
   /*
    * INITIALIZATION  
    */
+   
+  document.body.setAttribute('spellcheck', false);
 
   var bpContainer = document.getElementById('bigpicture-container'),
-    bp = document.getElementById('bigpicture'),
-    previous;
-
-  document.body.setAttribute('spellcheck', false);
+    bp = document.getElementById('bigpicture');
 
   if (!bp) return;
 
@@ -35,7 +34,7 @@
    * TEXT BOXES
    */            
    
-  function updateposition(e) { 
+  var updateposition = window.updateposition = function (e) { 
     e.style.fontSize = $(e).data("size") / current.zoom + 'px';
     e.style.left = ($(e).data("x") - current.x) / current.zoom - bp.x + 'px';
     e.style.top = ($(e).data("y") - current.y) / current.zoom - bp.y + 'px';
@@ -45,7 +44,7 @@
    
   $(bp).on('blur', '.text', function() { if ($(this).text().replace(/^\s+|\s+$/g, '') == '') { $(this).remove(); }; });
   
-  $(bp).on('input', '.text', function(){ redosearch = true; });   
+  $(bp).on('input', '.text', function() { redosearch = true; });   
    
   function isContainedByClass(e, cls) { while (e && e.tagName) { if (e.classList.contains(cls)) return true; e = e.parentNode; } return false; }
    
@@ -119,6 +118,9 @@
     e.preventDefault();
     onzoom(e.ctrlKey ? current.zoom * 1.7 * 1.7 : current.zoom / 1.7 / 1.7, current.x + e.clientX * current.zoom, current.y + e.clientY * current.zoom, e.clientX, e.clientY);
   }
+  
+  var biggestpictureseen = false, 
+    previous;    
 
   function onzoom(zoom, wx, wy, sx, sy) {  // zoom on (wx, wy) (world coordinates) which will be placed on (sx, sy) (screen coordinates)
     wx = (typeof wx === "undefined") ? current.x + window.innerWidth / 2 * current.zoom : wx;
@@ -139,8 +141,6 @@
   function zoomontext(res) {
     onzoom($(res).data('size') / 20, $(res).data('x'), $(res).data('y'));        
   }
-  
-  var biggestpictureseen = false;  
   
   function seethebigpicture(e) {
     e.preventDefault();

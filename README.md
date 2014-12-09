@@ -1,7 +1,7 @@
 bigpicture.js
 =============
 
-bigpicture.js is a framework that allows infinite panning and infinite zooming. 
+bigpicture.js is a library that allows infinite panning and infinite zooming in HTML pages. 
  
 [Live demo here](http://josephernest.github.io/bigpicture.js/bigpicture.html)
 
