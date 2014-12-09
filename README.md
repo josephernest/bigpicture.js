@@ -14,7 +14,7 @@ Screenshot
 
 Zoom and pan!
 
-[![screenshot](http://gget.it/rm8b9h2o/3.jpg)](www.bigpicture.bi/demo)
+[![screenshot](http://gget.it/rm8b9h2o/3.jpg)](http://www.bigpicture.bi/demo)
 
 
 TODO
