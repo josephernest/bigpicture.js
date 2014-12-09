@@ -14,8 +14,14 @@ Screenshot
 
 Zoom and pan!
 
-![screenshot](http://gget.it/rm8b9h2o/3.jpg)
+[![screenshot](http://gget.it/rm8b9h2o/3.jpg)](www.bigpicture.bi/demo)
 
+
+TODO
+----
+
+* A collaborative version of this would be super nice: many people writing everywhere on a single page would be fun!
+WebSockets / node.js connoisseurs needed and welcome!
 
 About
 ----
@@ -24,4 +30,4 @@ Author : Joseph Ernest ([@JosephErnest](http:/twitter.com/JosephErnest))
 
 License
 ----
-MIT
+MIT license
