@@ -284,7 +284,6 @@ var bigpicture = (function() {
    * API
    */  
    
-   return { updateTextPosition: updateTextPosition, 
-     newText: newText }
+   return { newText: newText }
   
 })();
