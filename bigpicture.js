@@ -11,7 +11,7 @@
  *   
  */
 
-(function() {
+var bigpicture = (function() {
   "use strict";
 
   /*
@@ -28,64 +28,67 @@
   var current = {x: $(bp).data('x'), y: $(bp).data('y'), zoom: $(bp).data('zoom')};
 
   bp.x = 0; bp.y = 0;
-  bp.updateposition = function() { bp.style.left = bp.x + 'px'; bp.style.top = bp.y + 'px'; };
+  bp.updateContainerPosition = function() { bp.style.left = bp.x + 'px'; bp.style.top = bp.y + 'px'; };
   
   /*
    * TEXT BOXES
    */            
    
-  var updateposition = window.updateposition = function (e) { 
-    e.style.fontSize = $(e).data("size") / current.zoom + 'px';
-    e.style.left = ($(e).data("x") - current.x) / current.zoom - bp.x + 'px';
-    e.style.top = ($(e).data("y") - current.y) / current.zoom - bp.y + 'px';
-  };
-  
-  $(".text").each(function() { updateposition(this); });     // initialization   
+  $(".text").each(function() { updateTextPosition(this); });     // initialization   
    
   $(bp).on('blur', '.text', function() { if ($(this).text().replace(/^\s+|\s+$/g, '') == '') { $(this).remove(); }; });
   
   $(bp).on('input', '.text', function() { redosearch = true; });   
    
   function isContainedByClass(e, cls) { while (e && e.tagName) { if (e.classList.contains(cls)) return true; e = e.parentNode; } return false; }
-   
-  bpContainer.onclick = function(e) {
-    if (isContainedByClass(e.target, 'text')) return;
+  
+  function updateTextPosition(e) { 
+    e.style.fontSize = $(e).data("size") / current.zoom + 'px';
+    e.style.left = ($(e).data("x") - current.x) / current.zoom - bp.x + 'px';
+    e.style.top = ($(e).data("y") - current.y) / current.zoom - bp.y + 'px';
+  };
+  
+  function newText(x, y, size, text) {
     var tb = document.createElement('div');
     tb.className = "text";
     tb.contentEditable = true;
-    $(tb).data("size", 20 * current.zoom);
-    $(tb).data("x", current.x + (e.clientX) * current.zoom);
-    $(tb).data("y", current.y + (e.clientY) * current.zoom);
-    updateposition(tb);
+	tb.innerHTML = text;
+    $(tb).data("x", x).data("y", y).data("size", size);
+    updateTextPosition(tb);
     bp.appendChild(tb);
-    tb.focus();
+	return tb;
+  }
+   
+  bpContainer.onclick = function(e) {
+    if (isContainedByClass(e.target, 'text')) return;
+    newText(current.x + (e.clientX) * current.zoom, current.y + (e.clientY) * current.zoom, 20 * current.zoom, '').focus();
   }
   
   /*
    * PAN AND MOVE  
    */
   
-  var movingtext = null,
+  var movingText = null,
     dragging = false,
-    previousmouse;
+    previousMousePosition;
   
   bpContainer.onmousedown = function(e) {
     if ($(e.target).hasClass('text') && (e.ctrlKey || e.metaKey)) {
-      movingtext = e.target;
-      movingtext.className = "text noselect notransition";
+      movingText = e.target;
+      movingText.className = "text noselect notransition";
     }
     else {
-      movingtext = null;
+      movingText = null;
       dragging = true;
     }
     biggestpictureseen = false;
-    previousmouse = {x: e.pageX, y: e.pageY};
+    previousMousePosition = {x: e.pageX, y: e.pageY};
   }
   
   window.onmouseup = function() {
     dragging = false;
-    if (movingtext) movingtext.className = "text";
-    movingtext = null;
+    if (movingText) movingText.className = "text";
+    movingText = null;
   }
   
   bpContainer.ondragstart = function(e) {
@@ -95,18 +98,18 @@
   bpContainer.onmousemove = function(e) {
     if (dragging) {
       bp.style.transitionDuration = "0s";
-      bp.x += e.pageX - previousmouse.x;
-      bp.y += e.pageY - previousmouse.y;
-      bp.updateposition();
-      current.x -= (e.pageX - previousmouse.x) * current.zoom;
-      current.y -= (e.pageY - previousmouse.y) * current.zoom;
-      previousmouse = {x: e.pageX, y: e.pageY};
+      bp.x += e.pageX - previousMousePosition.x;
+      bp.y += e.pageY - previousMousePosition.y;
+      bp.updateContainerPosition();
+      current.x -= (e.pageX - previousMousePosition.x) * current.zoom;
+      current.y -= (e.pageY - previousMousePosition.y) * current.zoom;
+      previousMousePosition = {x: e.pageX, y: e.pageY};
     }
-    if (movingtext) {
-      $(movingtext).data("x", $(movingtext).data("x") + (e.pageX - previousmouse.x) * current.zoom);
-      $(movingtext).data("y", $(movingtext).data("y") + (e.pageY - previousmouse.y) * current.zoom);
-      updateposition(movingtext);
-      previousmouse = {x: e.pageX, y: e.pageY};
+    if (movingText) {
+      $(movingText).data("x", $(movingText).data("x") + (e.pageX - previousMousePosition.x) * current.zoom);
+      $(movingText).data("y", $(movingText).data("y") + (e.pageY - previousMousePosition.y) * current.zoom);
+      updateTextPosition(movingText);
+      previousMousePosition = {x: e.pageX, y: e.pageY};
     }
   }
   
@@ -130,10 +133,10 @@
   
     bp.style.transitionDuration = "0.2s";      
 
-    bp.x = 0, bp.y = 0; bp.updateposition();
+    bp.x = 0, bp.y = 0; bp.updateContainerPosition();
     current = {x: wx - sx * zoom, y: wy - sy * zoom, zoom: zoom};
 
-    $(".text").each(function() { updateposition(this); });
+    $(".text").each(function() { updateTextPosition(this); });
     
     biggestpictureseen = false;
   }
@@ -276,4 +279,12 @@
       return;
     }
   } 
+  
+  /*
+   * API
+   */  
+   
+   return { updateTextPosition: updateTextPosition, 
+     newText: newText }
+  
 })();
