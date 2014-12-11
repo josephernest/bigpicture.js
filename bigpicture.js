@@ -36,7 +36,7 @@ var bigpicture = (function() {
 
   $(".text").each(function() { updateTextPosition(this); });     // initialization
 
-  $(bp).on('blur', '.text', function() { if ($(this).text().replace(/^\s+|\s+$/g, '') === '') { $(this).remove(); }; });
+  $(bp).on('blur', '.text', function() { if ($(this).text().replace(/^\s+|\s+$/g, '') === '') { $(this).remove(); } });
 
   $(bp).on('input', '.text', function() { redosearch = true; });
 
@@ -231,9 +231,10 @@ var bigpicture = (function() {
    */
 
   var mousewheeltime = new Date(), mousewheeldelta = 0, last_e, mousewheeltimer = null;
+  var mousewheel;
 
   if (navigator.appVersion.indexOf("Mac") != -1) {   // Mac OS X
-    var mousewheel = function(e) {
+    mousewheel = function(e) {
       e.preventDefault();
       mousewheeldelta += Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
       last_e = e;
@@ -245,7 +246,7 @@ var bigpicture = (function() {
     };
   }
   else {
-    var mousewheel = function(e) {
+    mousewheel = function(e) {
       e.preventDefault();
       var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
       onzoom((delta > 0) ? current.zoom / 1.7 : current.zoom * 1.7, current.x + e.clientX * current.zoom, current.y + e.clientY * current.zoom, e.clientX, e.clientY);
@@ -257,7 +258,7 @@ var bigpicture = (function() {
   else
     document.addEventListener('DOMMouseScroll', mousewheel, false);
 
-    /*
+  /*
    * KEYBOARD SHORTCUTS
    */
 
