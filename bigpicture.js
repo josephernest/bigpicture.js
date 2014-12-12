@@ -65,18 +65,6 @@ var bigpicture = (function() {
   };
 
   /*
-  * IMAGES
-  */
-
-  $(".image").each(function() { updateImagePosition(this); });     // initialization
-
-  function updateImagePosition(e) {
-    e.style.scale = $(e).data("size") / current.zoom;
-    e.style.left = ($(e).data("x") - current.x) / current.zoom - bp.x + 'px';
-    e.style.top = ($(e).data("y") - current.y) / current.zoom - bp.y + 'px';
-  }
-
-  /*
    * PAN AND MOVE
    */
 
@@ -147,7 +135,7 @@ var bigpicture = (function() {
 
     bp.x = 0; bp.y = 0;
     bp.updateContainerPosition();
-    current = {x: wx - sx * zoom, y: wy - sy * zoom, zoom: zoom};
+    current.x = wx - sx * zoom; current.y = wy - sy * zoom; current.zoom = zoom;
 
     $(".text").each(function() { updateTextPosition(this); });
 
@@ -230,8 +218,11 @@ var bigpicture = (function() {
    * MOUSEWHEEL
    */
 
-  var mousewheeltime = new Date(), mousewheeldelta = 0, last_e, mousewheeltimer = null;
-  var mousewheel;
+  var mousewheeltime = new Date(), 
+    mousewheeldelta = 0, 
+    last_e, 
+    mousewheeltimer = null, 
+    mousewheel;
 
   if (navigator.appVersion.indexOf("Mac") != -1) {   // Mac OS X
     mousewheel = function(e) {
@@ -298,6 +289,6 @@ var bigpicture = (function() {
    * API
    */
 
-   return { newText: newText };
+  return { newText: newText, current: current };
 
 })();
