@@ -118,7 +118,7 @@ var bigpicture = (function() {
 
   bpContainer.ondblclick = function(e) {
     e.preventDefault();
-    onZoom(e.ctrlKey ? current.zoom * 1.7 * 1.7 : current.zoom / 1.7 / 1.7, current.x + e.clientX * current.zoom, current.y + e.clientY * current.zoom, e.clientX, e.clientY);
+    onZoom((e.ctrlKey || e.metaKey) ? current.zoom * 1.7 * 1.7 : current.zoom / 1.7 / 1.7, current.x + e.clientX * current.zoom, current.y + e.clientY * current.zoom, e.clientX, e.clientY);
   };
 
   var biggestPictureSeen = false,
