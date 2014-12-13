@@ -45,6 +45,7 @@ var bigpicture = (function() {
     e.style.fontSize = $(e).data("size") / current.zoom + 'px';
     e.style.left = ($(e).data("x") - current.x) / current.zoom - bp.x + 'px';
     e.style.top = ($(e).data("y") - current.y) / current.zoom - bp.y + 'px';
+    $(bp).trigger('bpupdate',[e]);
   }
 
   function newText(x, y, size, text) {
@@ -55,6 +56,7 @@ var bigpicture = (function() {
     $(tb).data("x", x).data("y", y).data("size", size);
     updateTextPosition(tb);
     bp.appendChild(tb);
+    $(bp).trigger('bpnew',[x, y, size, text]);
     return tb;
   }
 
@@ -129,6 +131,8 @@ var bigpicture = (function() {
     wy = (typeof wy === "undefined") ? current.y + window.innerHeight / 2 * current.zoom : wy;
     sx = (typeof sx === "undefined") ? window.innerWidth / 2  : sx;
     sy = (typeof sy === "undefined") ? window.innerHeight / 2 : sy;
+
+    $(bp).trigger('bpzoom', [zoom, wx, wy, sx, sy]);
 
     bp.style.transitionDuration = "0.2s";
 
