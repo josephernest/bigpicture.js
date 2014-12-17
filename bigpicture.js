@@ -264,14 +264,13 @@ var bigpicture = (function() {
     }
     if ((e.ctrlKey && !e.altKey || e.metaKey) && e.keyCode == 70) {         // CTRL+F
       e.preventDefault();
-      query = window.prompt("What are you looking for?", "");
-      findNext(query);
+      setTimeout(function() { query = window.prompt("What are you looking for?", ""); findNext(query); }, 10);
       return;
     }
     if (e.keyCode == 114) {                 // F3
       e.preventDefault();
-      if (results.index == -1) { query = window.prompt("What are you looking for?", ""); }
-      findNext(query);
+      if (results.index == -1) { setTimeout(function() { query = window.prompt("What are you looking for?", ""); findNext(query); }, 10); }
+      else { findNext(query); }
       return;
     }
     if (e.keyCode == 113) {                 // F2
