@@ -9,7 +9,7 @@ bigpicture.js is a library that allows infinite panning and infinite zooming in 
 
 Here the bigger project: www.bigpicture.bi/demo !
 
-An attempt of collaborative version: [github.com/josephernest/BigBigPicture](http://github.com/josephernest/BigBigPicture) / [Collaborative live demo](http://gget.it:3001/)
+A collaborative version: [github.com/josephernest/AReallyBigPage](http://github.com/josephernest/AReallyBigPage) / [Live demo](http://areallybigpage.com)
 
 Screenshot
 ----
