@@ -24,7 +24,12 @@ var bigpicture = (function() {
 
   if (!bp) { return; }
 
-  var current = { x: $(bp).data('x'), y: $(bp).data('y'), zoom: $(bp).data('zoom') };
+  var params = { x: getQueryVariable('x'), y: getQueryVariable('y'), zoom: getQueryVariable('zoom') };
+
+  var current = {};
+  current.x = params.x ? params.x : $(bp).data('x');
+  current.y = params.y ? params.y : $(bp).data('y');
+  current.zoom = params.zoom ? params.zoom : $(bp).data('zoom');
 
   bp.x = 0; bp.y = 0;
   bp.updateContainerPosition = function() { bp.style.left = bp.x + 'px'; bp.style.top = bp.y + 'px'; };
@@ -38,8 +43,6 @@ var bigpicture = (function() {
   $(bp).on('blur', '.text', function() { if ($(this).text().replace(/^\s+|\s+$/g, '') === '') { $(this).remove(); } });
 
   $(bp).on('input', '.text', function() { redoSearch = true; });
-
-  function isContainedByClass(e, cls) { while (e && e.tagName) { if (e.classList.contains(cls)) { return true; } e = e.parentNode; } return false; }
 
   function updateTextPosition(e) {
     e.style.fontSize = $(e).data("size") / current.zoom + 'px';
@@ -192,7 +195,7 @@ var bigpicture = (function() {
 
   function find(txt) {
     results = { index: -1, elements: [], text: txt };
-    $(".text").each(function(index) {
+    $(".text").each(function() {
       if ($(this).text().toLowerCase().indexOf(txt.toLowerCase()) != -1) { results.elements.push(this); }
     });
     if (results.elements.length > 0) { results.index = 0; }
@@ -215,8 +218,7 @@ var bigpicture = (function() {
    * MOUSEWHEEL
    */
 
-  var mousewheeltime = new Date(), 
-    mousewheeldelta = 0, 
+  var mousewheeldelta = 0, 
     last_e, 
     mousewheeltimer = null, 
     mousewheel;
@@ -279,6 +281,14 @@ var bigpicture = (function() {
       return;
     }
   };
+
+  /*
+   * USEFUL FUNCTIONS
+   */
+
+  function isContainedByClass(e, cls) { while (e && e.tagName) { if (e.classList.contains(cls)) { return true; } e = e.parentNode; } return false; }
+
+  function getQueryVariable(id) { var params = window.location.search.substring(1).split("&");  for (var i = 0; i < params.length; i++) { var p = params[i].split("="); if (p[0] == id) { return p[1]; } } return(false); }
 
   /*
    * API
