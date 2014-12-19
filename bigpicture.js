@@ -27,9 +27,9 @@ var bigpicture = (function() {
   var params = { x: getQueryVariable('x'), y: getQueryVariable('y'), zoom: getQueryVariable('zoom') };
 
   var current = {};
-  current.x = params.x ? params.x : $(bp).data('x');
-  current.y = params.y ? params.y : $(bp).data('y');
-  current.zoom = params.zoom ? params.zoom : $(bp).data('zoom');
+  current.x = params.x ? parseFloat(params.x) : $(bp).data('x');
+  current.y = params.y ? parseFloat(params.y) : $(bp).data('y');
+  current.zoom = params.zoom ? parseFloat(params.zoom) : $(bp).data('zoom');
 
   bp.x = 0; bp.y = 0;
   bp.updateContainerPosition = function() { bp.style.left = bp.x + 'px'; bp.style.top = bp.y + 'px'; };
