@@ -17,12 +17,12 @@ var bigpicture = (function() {
    * INITIALIZATION
    */
 
-  document.body.setAttribute('spellcheck', false);
-
   var bpContainer = document.getElementById('bigpicture-container'),
     bp = document.getElementById('bigpicture');
 
   if (!bp) { return; }
+
+  bp.setAttribute('spellcheck', false);
 
   var params = { x: getQueryVariable('x'), y: getQueryVariable('y'), zoom: getQueryVariable('zoom') };
 
@@ -244,8 +244,8 @@ var bigpicture = (function() {
     };
   }
 
-  if ("onmousewheel" in document) { document.onmousewheel = mousewheel; }
-  else { document.addEventListener('DOMMouseScroll', mousewheel, false); }
+  if ("onmousewheel" in document) { bpContainer.onmousewheel = mousewheel; }
+  else { bpContainer.addEventListener('DOMMouseScroll', mousewheel, false); }
 
   /*
    * KEYBOARD SHORTCUTS

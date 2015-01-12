@@ -1,8 +1,8 @@
-html, body {
-  margin: 0;
-  padding: 0;
+#bigpicture-container {
   overflow: hidden;
-  min-height: 100%;
+  position: fixed;
+  min-height: 100%;   
+  min-width: 100%;    
   background: #D0D0D0;
   background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(#F0F0F0), to(#B0B0B0));
   background: -webkit-radial-gradient(#F0F0F0, #B0B0B0);
@@ -10,12 +10,6 @@ html, body {
   background:      -o-radial-gradient(#F0F0F0, #B0B0B0);
   background:         radial-gradient(#F0F0F0, #B0B0B0);
   -webkit-font-smoothing: antialiased;
-}
-
-#bigpicture-container {
-  position: fixed;
-  min-height: 100%;   
-  min-width: 100%;    
 }
 
 #bigpicture {
