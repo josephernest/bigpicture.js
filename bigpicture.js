@@ -10,8 +10,6 @@
  *
  */
 
-console.log('remove - jquery - done');
-
 var bigpicture = (function () {
     "use strict";
 
