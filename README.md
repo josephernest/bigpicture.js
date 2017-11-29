@@ -11,6 +11,8 @@ Here the bigger project: www.bigpictu.re/demo !
 
 A collaborative version: [github.com/josephernest/AReallyBigPage](http://github.com/josephernest/AReallyBigPage) / [Live demo](http://bigpictu.re/areallybigpage)
 
+NB: It doesn't support mobile browsers yet.
+
 Screenshot
 ----
 
