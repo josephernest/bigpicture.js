@@ -45,7 +45,14 @@ var bigpicture = (function() {
   $(bp).on('input', '.text', function() { redoSearch = true; });
 
   function updateTextPosition(e) {
-    e.style.fontSize = $(e).data("size") / current.zoom + 'px';
+    const sizeOpacity1 = 10; //Maximum font size with opacity = 1
+    const sizeOpacity0 = 300;  //Minimum font size with opacity = 0
+
+    var fontSize = $(e).data("size") / current.zoom;
+    var opacity = (sizeOpacity1 - fontSize) / (sizeOpacity0 - sizeOpacity1) + 1;
+    e.style.opacity = opacity > 0 ? opacity : 0;
+    e.style.fontSize = fontSize + 'px';
+
     e.style.left = ($(e).data("x") - current.x) / current.zoom - bp.x + 'px';
     e.style.top = ($(e).data("y") - current.y) / current.zoom - bp.y + 'px';
   }
